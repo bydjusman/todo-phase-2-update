@@ -1,55 +1,70 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+<!--
+Sync Impact Report:
+Version change: N/A → 1.0.0
+Modified principles: None (new constitution)
+Added sections: All sections
+Removed sections: None
+Templates requiring updates: ⚠ pending (plan-template.md, spec-template.md, tasks-template.md, commands)
+Follow-up TODOs: None
+-->
+# Todo Web App Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. API-First Design
+All features must begin with a well-defined API contract documented in specs/api/. Endpoints follow RESTful principles with consistent response formats, proper HTTP status codes, and comprehensive error handling. Before implementing any feature, the API contract must be reviewed and approved.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Security-First Architecture
+Security is built into every layer, not added afterward. All endpoints require JWT authentication, sensitive data is never logged, passwords are properly hashed, and CSRF protection is implemented. Authentication uses industry-standard libraries like Better Auth with proper token management.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Test-Driven Development (NON-NEGOTIABLE)
+TDD is mandatory: Tests written first → User requirements approved → Tests fail initially → Then implement → Refactor. All code must have corresponding tests with reasonable coverage thresholds. Red-Green-Refactor cycle is strictly enforced for all implementations.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Type Safety & Validation
+All code must be strongly typed using TypeScript on the frontend and appropriate type systems on the backend. Input validation occurs at API boundaries using schema validation libraries like Zod or Pydantic. Runtime validation ensures data integrity throughout the application.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Performance & Observability
+Performance is a feature: all API endpoints must respond within 500ms for 95% of requests. Comprehensive logging and metrics collection enables monitoring and debugging. Critical paths are instrumented to enable rapid issue identification and resolution.
 
-### [PRINCIPLE_6_NAME]
+### VI. Clean Architecture & Modularity
+Code follows clean architecture principles with clear separation of concerns. Business logic is separated from infrastructure, components have single responsibilities, and dependencies flow inward. This ensures maintainability and testability of the codebase.
 
+## Additional Security Requirements
 
-[PRINCIPLE__DESCRIPTION]
+### Authentication & Authorization
+- All API endpoints require valid JWT tokens in Authorization header
+- User data isolation through user_id foreign key validation
+- Session management with proper timeout and refresh mechanisms
+- Password requirements: minimum 8 characters, mixed case, numbers, special characters
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+### Data Protection
+- Sensitive data encryption at rest and in transit
+- No PII logged to standard logs
+- Regular security scanning of dependencies
+- Input sanitization to prevent injection attacks
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+## Development Workflow
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+### Code Review Process
+- All code changes require peer review before merging
+- PRs must reference feature specifications from specs/features/
+- Code must pass all tests and linting checks
+- Architecture decisions must align with documented plans
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+### Testing Standards
+- Unit tests for all business logic components
+- Integration tests for API endpoints
+- End-to-end tests for critical user flows
+- Performance tests for any database queries or complex operations
+
+### Quality Gates
+- 80% test coverage minimum for new features
+- All automated tests must pass before merge
+- Security scanning must pass
+- Linting and formatting checks must pass
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution supersedes all other development practices and standards. Amendments require explicit documentation, team approval, and a migration plan for existing code. All pull requests and code reviews must verify compliance with these principles. Complexity must be justified with clear benefits, and the guidance in CLAUDE.md provides runtime development guidance.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2026-02-16 | **Last Amended**: 2026-02-16
