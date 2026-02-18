@@ -1,4 +1,5 @@
 {
+  "rootDirectory": "apps/client",
   "build": {
     "env": {
       "NEXT_PUBLIC_API_URL": "https://usmannick-phase-2-update-backend.hf.space",
